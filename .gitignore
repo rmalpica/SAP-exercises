@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Environments
+.venv/
+.env/
+conda-meta/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Outputs (course convention)
+**/outputs/
+**/*.csv
+**/*.png
+**/*.pdf
+
+# If you DO want to keep some outputs, remove the patterns above
+

@@ -1,0 +1,39 @@
+name: saprop
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+
+  # Core scientific stack
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+
+  # Modeling & simulation
+  - cantera
+  - simpy
+  - emcee
+
+  # Machine learning
+  - pytorch
+  - scikit-learn
+
+  # Jupyter
+  - jupyterlab
+  - notebook
+  - ipykernel
+
+  # Utilities
+  - tqdm
+  - rich
+  - pyyaml
+
+  # Documentation (for GitHub Pages / MkDocs)
+  - pip
+  - pip:
+      - mkdocs
+      - mkdocs-material
+      - mkdocs-awesome-pages-plugin
+      - mkdocs-git-revision-date-localized-plugin
+

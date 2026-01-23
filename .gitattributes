@@ -1,0 +1,6 @@
+# Normalize line endings
+* text=auto
+
+# Notebooks: treat as binary for cleaner diffs (optional)
+*.ipynb -text
+
