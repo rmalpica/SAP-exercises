@@ -50,3 +50,5 @@ Run scripts from the repo root so relative paths behave consistently:
 python chapters/300_mechanisms/scripts/EI.py
 ```
 
+
+[![Documentation Status](https://img.shields.io/badge/docs-online-success)](https://rmalpica.github.io/SAP-exercises/)
