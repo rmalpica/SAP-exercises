@@ -27,6 +27,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
   - toc:
       permalink: true
 
@@ -40,7 +42,14 @@ nav:
       - 800 — Hybrid-electric: chapters/800_hybrid_electric.md
       - 1000 — Machine learning: chapters/1000_ML.md
       - 1000 — Uncertainty quantification: chapters/1000_UQ.md
+  - Exercises:
+      - 200 — Simple climate model: exercises/200_simple_climate_model.md
+      - 300.1 — Contrail formation models: exercises/300_contrail_models.md
+      - 300.2 — Emission indices (Cantera): exercises/300_emission_indices_cantera.md
   - Setup:
       - Installation: setup/installation.md
       - Troubleshooting: setup/troubleshooting.md
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

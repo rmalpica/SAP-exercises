@@ -34,11 +34,15 @@ conda activate saprop
 python -m ipykernel install --user --name saprop --display-name "SAProp (saprop)"
 ```
 
-### 3) Install the external dependency: PhlyGreen
+### 3) Install the external dependencies: pyAircraftEngineFramework and PhlyGreen
 Some exercises rely on the PhlyGreen Python package, developed separately and hosted on GitHub:
 ```bash
 pip install "git+https://github.com/rmalpica/PhlyGreen.git@3f42cbf907dba655bad3cfe8114d7c9bcda7f02a#subdirectory=trunk"
 ```
+```bash
+pip install "git+https://github.com/rmalpica/pyAircraftEngineFramework"
+```
+
 
 ---
 

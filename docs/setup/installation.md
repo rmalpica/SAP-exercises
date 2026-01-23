@@ -21,4 +21,9 @@ python -m ipykernel install --user --name saprop --display-name "SAProp (saprop)
 pip install "git+https://github.com/rmalpica/PhlyGreen.git@3f42cbf907dba655bad3cfe8114d7c9bcda7f02a#subdirectory=trunk"
 ```
 
+### Install pyAircraftEngineFramework
+```bash
+pip install "git+https://github.com/rmalpica/pyAircraftEngineFramework
+```
+
 
