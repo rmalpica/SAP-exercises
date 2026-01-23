@@ -1,7 +1,7 @@
 site_name: Sustainable Aircraft Propulsion — Exercises
-site_description: Companion website for Python and Jupyter exercises
-repo_name: SAP-exercises
+site_description: Companion website for Python and Jupyter exercises (Sapienza)
 repo_url: https://github.com/rmalpica/SAP-exercises
+repo_name: rmalpica/SAP-exercises
 edit_uri: edit/main/docs/
 
 theme:
@@ -9,13 +9,14 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
-    - navigation.indexes
     - content.code.copy
     - search.highlight
     - search.suggest
 
 plugins:
   - search
+  - mkdocs-jupyter:
+      include_source: True
   - awesome-pages
   - git-revision-date-localized:
       type: date
@@ -31,6 +32,15 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Exercises:
-      - Sustainability: exercises/simple_climate_model.md
+  - Chapters:
+      - 200 — Sustainability: chapters/200_sustainability.md
+      - 300 — Mechanisms: chapters/300_mechanisms.md
+      - 600 — Hydrogen combustion: chapters/600_hydrogen_combustion.md
+      - 700 — Hydrogen fuel cells: chapters/700_hydrogen_fuel_cells.md
+      - 800 — Hybrid-electric: chapters/800_hybrid_electric.md
+      - 1000 — Machine learning: chapters/1000_ML.md
+      - 1000 — Uncertainty quantification: chapters/1000_UQ.md
+  - Setup:
+      - Installation: setup/installation.md
+      - Troubleshooting: setup/troubleshooting.md
 
