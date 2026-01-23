@@ -32,15 +32,14 @@ By completing this exercise, you will learn to:
 
 The script:
 
-1) Loads a chemical mechanism that includes **dodecane** fuel chemistry and **NOx**
-2) Sets initial conditions (temperature \(T_0\), pressure \(P_0\), equivalence ratio \(\phi\))
-3) Runs a **constant-pressure ideal gas reactor**
-4) At each time step:
-
-   - extracts mass fractions of CO₂, H₂O, CO, NO
-   - estimates fuel consumed from the decrease in fuel mass fraction
-   - computes emission indices \(EI\)
-   - estimates a combustion efficiency proxy using enthalpy change vs. LHV
+1. Loads a chemical mechanism that includes **dodecane** fuel chemistry and **NOx**
+2. Sets initial conditions (temperature \(T_0\), pressure \(P_0\), equivalence ratio \(\phi\))
+3. Runs a **constant-pressure ideal gas reactor**
+4. At each time step:
+    1. extracts mass fractions of CO₂, H₂O, CO, NO
+    2. estimates fuel consumed from the decrease in fuel mass fraction
+    3. computes emission indices \(EI\)
+    4. estimates a combustion efficiency proxy using enthalpy change vs. LHV
 
 It then plots EI(t), temperature(t), and the efficiency proxy.
 
@@ -48,10 +47,10 @@ It then plots EI(t), temperature(t), and the efficiency proxy.
 
 ## How to run
 
-From the repository root:
+From the script folder (chapters/300_mechanisms/scripts):
 
 ```bash
-python chapters/300_mechanisms/scripts/EI.py
+python EI.py
 ```
 
 --- 
