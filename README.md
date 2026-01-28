@@ -1,3 +1,6 @@
+
+[![Documentation Status](https://img.shields.io/badge/docs-online-success)](https://rmalpica.github.io/SAP-exercises/)
+
 # Sustainable Aircraft Propulsion — Python Exercises
 
 This repository contains **Python scripts (`.py`)** and **Jupyter notebooks (`.ipynb`)** for the course **Sustainable Aircraft Propulsion**.
@@ -43,16 +46,3 @@ pip install "git+https://github.com/rmalpica/PhlyGreen.git@3f42cbf907dba655bad3c
 pip install "git+https://github.com/rmalpica/pyAircraftEngineFramework"
 ```
 
-
----
-
-## Running scripts
-
-Run scripts from the repo root so relative paths behave consistently:
-
-```bash
-python chapters/300_mechanisms/scripts/EI.py
-```
-
-
-[![Documentation Status](https://img.shields.io/badge/docs-online-success)](https://rmalpica.github.io/SAP-exercises/)
