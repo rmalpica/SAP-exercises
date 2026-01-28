@@ -29,7 +29,7 @@ theoretical_heat_release = LHV * 1e6  #J/Kg
 print("theoretical_heat_release (LHV) [MJ/kg]: ", theoretical_heat_release * 1e-6)
 
 # Create a constant-pressure reactor and insert the gas
-reactor = ct.IdealGasConstPressureReactor(gas)
+reactor = ct.IdealGasConstPressureReactor(gas, clone=False)
 
 # Create a reactor network
 sim = ct.ReactorNet([reactor])
@@ -65,8 +65,8 @@ while t < t_end:
     temperatures.append(reactor.T)
 
     # Current mass fractions
-    Y = reactor.thermo.Y
-    species_names = reactor.thermo.species_names
+    Y = reactor.phase.Y
+    species_names = reactor.phase.species_names
 
     # Mass fractions of species of interest
     Y_CO2 = gas['CO2'].Y[0]
@@ -80,7 +80,7 @@ while t < t_end:
     m_fuel_consumed = initial_fuel_mass - current_fuel_mass
 
     # Heat released so far
-    gas_outlet.TPY = Tstd, P0, reactor.thermo.Y
+    gas_outlet.TPY = Tstd, P0, reactor.phase.Y
     H_current = gas_outlet.enthalpy_mass 
     Q = (H_initial - H_current)  # Positive if heat is released
 
@@ -143,9 +143,8 @@ plt.legend()
 plt.title('Combustion Efficiency over Time')
 
 # Set transparent background
-plt.gcf().patch.set_alpha(0)  # Make the figure background transparent
 plt.subplots_adjust(hspace=0.5) 
-plt.savefig('results.png',dpi=800, transparent=True)  # Save figure with transparent background
+plt.savefig('../outputs/results.png',dpi=800)  # Save figure with transparent background
 
 plt.tight_layout()
 plt.show()

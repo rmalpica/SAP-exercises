@@ -168,5 +168,5 @@ def plot_b777_engine(xt, yt, model, scaler_X, scaler_Y, device='cpu'):
         axs[k + 2, 1].legend(legend_entries)
 
     #plt.tight_layout()
-    plt.savefig("plot-engine-perfo.png", dpi=800, transparent=False)
+    plt.savefig("../outputs/plot-engine-perfo.png", dpi=800, transparent=False)
     plt.show()

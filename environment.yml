@@ -28,6 +28,7 @@ dependencies:
   - tqdm
   - rich
   - pyyaml
+  - corner
 
   # Documentation (for GitHub Pages / MkDocs)
   - pip

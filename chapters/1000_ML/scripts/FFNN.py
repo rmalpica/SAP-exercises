@@ -65,7 +65,7 @@ def plot_losses(train_losses, val_losses):
     plt.ylabel('MSE Loss')
     plt.legend()
     plt.title('Training and Validation Loss over Epochs')
-    plt.savefig("plot-losses.png", dpi=800, transparent=False)
+    plt.savefig("../outputs/plot-losses.png", dpi=800, transparent=False)
     print("Saving figure to:", os.path.abspath("plot-losses.png"))
     plt.show()
 
@@ -164,8 +164,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a neural network for engine performance prediction.")
-    parser.add_argument('--input_file', type=str, default='b777_engine_inputs.dat', help='Path to input data file')
-    parser.add_argument('--output_file', type=str, default='b777_engine_outputs.dat', help='Path to output data file')
+    parser.add_argument('--input_file', type=str, default='../data/b777_engine_inputs.dat', help='Path to input data file')
+    parser.add_argument('--output_file', type=str, default='../data/b777_engine_outputs.dat', help='Path to output data file')
     parser.add_argument('--epochs', type=int, default=200, help='Number of training epochs')
     parser.add_argument('--batch_size', type=int, default=32, help='Mini-batch size')
     parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate')
