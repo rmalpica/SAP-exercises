@@ -46,6 +46,12 @@ nav:
       - 200 — Simple climate model: exercises/200_simple_climate_model.md
       - 300.1 — Contrail formation models: exercises/300_contrail_models.md
       - 300.2 — Emission indices (Cantera): exercises/300_emission_indices_cantera.md
+      - 600 — Hydrogen combustion: chapters/600_hydrogen_combustion.md
+      - 600.1 — Flame temperature: exercises/600_flame_temperature.md
+      - 600.2 — Turbofan performance: exercises/600_turbofan_performance.md
+      - 600.3 — Turbofan Pareto: exercises/600_turbofan_pareto.md
+      - 600.4 — H₂ tank thermodynamics: exercises/600_h2_tank.md
+      - 600.5 — Aircraft range: exercises/600_aircraft_range.md
   - Setup:
       - Installation: setup/installation.md
       - Troubleshooting: setup/troubleshooting.md
