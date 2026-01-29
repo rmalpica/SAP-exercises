@@ -4,7 +4,7 @@
 
 This notebook uses the **PhlyGreen** library. The official documentation is here:
 
-- PhlyGreen docs: https://rmalpica.github.io/PhlyGreen/
+- PhlyGreen docs: <https://rmalpica.github.io/PhlyGreen/>
 
 You are expected to consult the PhlyGreen documentation for:
 

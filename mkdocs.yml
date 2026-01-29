@@ -51,6 +51,7 @@ nav:
       - 600.3 — Turbofan Pareto: exercises/600_turbofan_pareto.md
       - 600.4 — H₂ tank thermodynamics: exercises/600_h2_tank.md
       - 600.5 — Aircraft range: exercises/600_aircraft_range.md
+      - 800.1 — Hybrid-electric: exercises/800_hybrid_phlygreen.md
       - 1000.1 — FFNN engine regression: exercises/1000_ffnn_engine_regression.md
       - 1000.2 — Bayesian climate inference: exercises/1000_bayesian_climate_inference.md
   - Setup:

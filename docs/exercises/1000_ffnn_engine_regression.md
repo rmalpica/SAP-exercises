@@ -2,11 +2,15 @@
 ## A simple neural network surrogate (PyTorch)
 
 ### Files
-- Training script: `FFNN.py`
-- Dataset:
+🧪 **Script**  
+[`FFNN.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/scripts/FFNN.py)
 
-    - `b777_engine_inputs.dat`
-    - `b777_engine_outputs.dat`
+🧪 **Dataset**  
+[`b777_engine_inputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/data/b777_engine_inputs.dat)
+[`b777_engine_outputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/data/b777_engine_outputs.dat)
+
+🧪 **Supporting script**  
+[`b777_engine.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/scripts/b777_engine.py)
 
 - Supporting script (model/data context): `b777_engine.py`
 
