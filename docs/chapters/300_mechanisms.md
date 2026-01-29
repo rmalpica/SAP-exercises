@@ -31,7 +31,7 @@ A Python script using **Cantera** to simulate a constant-pressure homogeneous re
 
 ---
 
-## What you should be able to do after this chapter
+## Learning outcomes
 
 After completing this chapter, you should be able to:
 
