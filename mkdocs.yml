@@ -57,6 +57,8 @@ nav:
   - Setup:
       - Installation: setup/installation.md
       - Troubleshooting: setup/troubleshooting.md
+  - About:
+      - About: about/about.md
 
 extra_javascript:
   - javascripts/mathjax.js
