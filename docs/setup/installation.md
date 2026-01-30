@@ -140,19 +140,20 @@ pip install "git+https://github.com/rmalpica/pyAircraftEngineFramework"
 
 ### 7.1 Python scripts
 
-Activate the environment and run:
+If you run from Command Line (terminal or Anaconda prompt), activate the environment first:
 
 ```bash
 conda activate saprop
-python script.py
 ```
 
-Example:
+then navigate to the folder and run, in example:
 
 ```bash
 cd chapters/300_mechanisms/scripts/ 
 python EI.py
 ```
+
+Alterntively, run the script from Visual Studio Code.
 
 ---
 
