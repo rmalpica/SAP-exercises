@@ -96,7 +96,7 @@ If you do not have Git installed:
 From the **repository root directory**:
 
 ```bash
-conda env create -f environment.yaml
+conda env create -f environment.yml
 conda activate saprop
 ```
 
