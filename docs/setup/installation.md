@@ -121,7 +121,7 @@ python -m ipykernel install --user --name saprop --display-name "SAProp (saprop)
 PhlyGreen is used in the **Hybrid-Electric Propulsion** chapter.
 
 ```bash
-pip install ""git+https://github.com/rmalpica/PhlyGreen.git@5e5f082#subdirectory=trunk"
+pip install "git+https://github.com/rmalpica/PhlyGreen.git@a5ff60ca9feaf94e518ef7eaab2e59af7718106c#subdirectory=trunk"
 ```
 
 ---
