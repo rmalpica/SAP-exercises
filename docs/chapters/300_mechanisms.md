@@ -1,15 +1,14 @@
-# 300 — Mechanisms
+# 300 — Mechanisms of the environmental impact of aviation
 
-This chapter connects **combustion products** to **atmospheric processes** and introduces how “mechanisms” (in a broad sense) sit between
-*engine physics* and *climate-relevant quantities*.
+This chapter deals with the mechanisms of formation of **combustion products** and their role within **atmospheric processes**, hence it sits between *engine physics* and *climate-relevant quantities*.
 
-In practice, engineers often need two kinds of models:
+More specifically, emphasis is given to:
 
-1) **Atmospheric formation criteria models**  
-   Example: *when do contrails form?* (thermodynamics + saturation curves)
-
-2) **Combustion chemistry / emissions models**  
+1) **Combustion chemistry / emissions models**  
    Example: *given a fuel/air mixture and residence time, what emission indices do we get?* (chemical kinetics + reactors)
+
+2) **Atmospheric formation criteria models**  
+   Example: *when do contrails form?* (water emissions + thermodynamics + saturation curves)
 
 The exercises below expose both, using a minimal but mechanistic workflow.
 
