@@ -3,6 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 
+from pathlib import Path
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
 
 def get_b777_engine():
     this_dir = os.path.split(__file__)[0]
@@ -168,5 +174,5 @@ def plot_b777_engine(xt, yt, model, scaler_X, scaler_Y, device='cpu'):
         axs[k + 2, 1].legend(legend_entries)
 
     #plt.tight_layout()
-    plt.savefig("../outputs/plot-engine-perfo.png", dpi=800, transparent=False)
+    plt.savefig(OUTPUTS / "plot-engine-perfo.png", dpi=800, transparent=False)
     plt.show()

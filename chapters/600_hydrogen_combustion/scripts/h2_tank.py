@@ -3,6 +3,14 @@ from scipy.integrate import solve_ivp
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
 # --------------------------------------------------------------------------
 # 1) Tabulated data (roughly from NIST or standard references) near 20-25K
 # --------------------------------------------------------------------------
@@ -201,7 +209,7 @@ def plot_saturation_curve_and_solution(
     ax.legend()
     
     if show:
-        plt.savefig("saturation.png", dpi=800, transparent=False)
+        plt.savefig(OUTPUTS / "saturation.png", dpi=800, transparent=False)
         plt.show()
 # --------------------------------------------------------------------------
 # 6) Demo / Plot
@@ -260,7 +268,7 @@ if __name__=="__main__":
     ax[1,1].legend()
 
     plt.tight_layout()
-    plt.savefig("tank-h2.png", dpi=800, transparent=False)
+    plt.savefig(OUTPUTS / "tank-h2.png", dpi=800, transparent=False)
     plt.show()
 
     plot_saturation_curve_and_solution(

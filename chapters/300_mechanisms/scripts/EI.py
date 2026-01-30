@@ -3,9 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from efficiency_functions import * 
 
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
+
 # Define the gas using a mechanism that includes dodecane and NOx chemistry
 # Replace 'nDodecane.cti' with your mechanism file name
-mech = 'CRECK_2003_TOT_HT_NOX.yaml' 
+mech = DATA / 'CRECK_2003_TOT_HT_NOX.yaml' 
 gas = ct.Solution(mech)
 
 # Initial conditions
@@ -144,7 +153,7 @@ plt.title('Combustion Efficiency over Time')
 
 # Set transparent background
 plt.subplots_adjust(hspace=0.5) 
-plt.savefig('../outputs/results.png',dpi=800)  # Save figure with transparent background
+plt.savefig(OUTPUTS / 'results.png',dpi=800)  # Save figure with transparent background
 
 plt.tight_layout()
 plt.show()

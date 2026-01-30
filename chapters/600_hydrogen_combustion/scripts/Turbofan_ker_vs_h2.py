@@ -4,6 +4,14 @@ from engine_framework.core import ISA, MixtureProperties
 import copy
 import numpy as np
 
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
 def solve_by_T4(engine, target_value, metric,
                 h=10000, Ma=0.8,
                 T4_min=1200, T4_max=2200,

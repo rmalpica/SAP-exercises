@@ -3,7 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import Tuple, Callable, Dict, Optional
+from pathlib import Path
 
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
+KEY_TSEC = "TSEC [MJ/Nh]"
+KEY_ST   = "specific thrust [N/(kg/s)]"
 # -------------------------------------------------------------------------
 # Design-space definition (continuous bounds for each decision variable)
 # -------------------------------------------------------------------------
@@ -555,6 +564,7 @@ def plot_pareto_multi(frontiers,
         plt.title(title)
     plt.grid(True, alpha=0.3)
     plt.legend()
+    plt.savefig(OUTPUTS / f"{title}_pareto.png", dpi=800, transparent=False)
     plt.show()
 
 def plot_xy_multi(frontiers,
@@ -634,6 +644,7 @@ def plot_xy_multi(frontiers,
     plt.legend()
     if invert_y:
         plt.gca().invert_yaxis()
+    plt.savefig(OUTPUTS / f"{title}_xy.png", dpi=800, transparent=False)
     plt.show()
 
 
@@ -720,6 +731,7 @@ def parallel_axes_plot(frontiers,
     ax.grid(True, axis="y", alpha=0.3)
     ax.legend()
     plt.tight_layout()
+    plt.savefig(OUTPUTS / "parallel_axis.png", dpi=800, transparent=False)
     plt.show()
 
 

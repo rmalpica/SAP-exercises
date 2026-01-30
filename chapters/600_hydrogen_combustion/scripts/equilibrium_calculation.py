@@ -1,10 +1,18 @@
 import numpy as np
 import cantera as ct
 
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
 	
 fuel = 'NC10H22:0.74,PHC3H7:0.15,CYC9H18:0.11'
+mechfile = DATA / "kerosene.yaml" 
 
-species = {S.name: S for S in ct.Species.list_from_file("kerosene.yaml")}
+species = {S.name: S for S in ct.Species.list_from_file(str(mechfile))}
 
 # Create an ideal gas phase object with species representing complete combustion
 complete_species = [species[S] for S in ("NC10H22","PHC3H7","CYC9H18", "O2", "N2", "CO2", "H2O")]
@@ -61,5 +69,6 @@ ax.set_xlabel(r"Equivalence ratio, $\phi$")
 ax.set_ylabel("Temperature [K]")
 plt.legend()
 
-plt.savefig("Tad-H2_vs_kerosene.png", dpi=800, transparent=False)
+plt.savefig(OUTPUTS / "Tad-H2_vs_kerosene.png", dpi=800, transparent=False)
+plt.show()
 

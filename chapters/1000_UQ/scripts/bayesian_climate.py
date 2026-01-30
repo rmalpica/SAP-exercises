@@ -8,6 +8,13 @@ import emcee
 from multiprocessing import Pool
 import sys
 
+from pathlib import Path
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
 # RUNNING in conda environment 'chaos'
 
 # -----------------------------
@@ -265,7 +272,7 @@ if __name__ == "__main__":
     print("t_data type", type(t_data))  # Should be <class 'numpy.ndarray'>    print(T_data)
 
    # Load the CO2 CSV file ----------------
-    co2_db = pd.read_csv('../data/co2_data.csv')
+    co2_db = pd.read_csv(DATA / 'co2_data.csv')
 
     # Ensure correct column names
     co2_db.columns = co2_db.columns.str.strip()
@@ -281,7 +288,7 @@ if __name__ == "__main__":
     print("co2_data type", type(co2_data)) 
 
     # Load the CH4 CSV file ----------------
-    ch4_db = pd.read_csv('../data/ch4_data.csv')
+    ch4_db = pd.read_csv(DATA / 'ch4_data.csv')
 
     # Ensure correct column names
     ch4_db.columns = ch4_db.columns.str.strip()
@@ -297,7 +304,7 @@ if __name__ == "__main__":
     print("ch4_data type", type(ch4_data))
 
     # Load the Delta T CSV file ----------------
-    T_db = pd.read_csv('../data/T_data.csv')
+    T_db = pd.read_csv(DATA / 'T_data.csv')
 
     # Ensure correct column names
     T_db.columns = T_db.columns.str.strip()
@@ -473,7 +480,7 @@ if __name__ == "__main__":
 
     #subset of parameters
     fig = corner.corner(samples_physical[:,[8,13,17]], labels=[param_names[i] for i in [8, 13, 17]], truths=map_estimate[[8,13,17]])
-    plt.savefig("../outputs/joint_subset.png", dpi=800, transparent=False)
+    plt.savefig(OUTPUTS / "joint_subset.png", dpi=800, transparent=False)
     plt.show()
 
     # Extract median parameter estimates
@@ -557,7 +564,7 @@ if __name__ == "__main__":
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("../outputs/PP_T-anomaly_"+scenario+".png", dpi=800, transparent=False)
+    plt.savefig(OUTPUTS / "PP_T-anomaly_"+scenario+".png", dpi=800, transparent=False)
     plt.show()
 
     # --- Compute percentiles ---
@@ -585,7 +592,7 @@ if __name__ == "__main__":
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("../outputs/PP_co2_"+scenario+".png", dpi=800, transparent=False)
+    plt.savefig(OUTPUTS / "PP_co2_"+scenario+".png", dpi=800, transparent=False)
     plt.show()
 
 
@@ -742,7 +749,7 @@ if __name__ == "__main__":
         plt.ylim(0, 1)
         plt.grid(True)
         plt.tight_layout()
-        plt.savefig("../outputs/sobol_T.png", dpi=800, transparent=False)
+        plt.savefig(OUTPUTS / "sobol_T.png", dpi=800, transparent=False)
         plt.show()
 
         S_avg = np.trapezoid(S_it, t_eval, axis=1) / (t_eval[-1] - t_eval[0])
@@ -760,7 +767,7 @@ if __name__ == "__main__":
         plt.title(f"Top {top_n} Parameters by Average Variance Contribution")
         plt.grid(True, axis='x', linestyle='--', alpha=0.6)
         plt.tight_layout()
-        plt.savefig("../outputs/sobol_T_integral.png", dpi=800, transparent=False)
+        plt.savefig(OUTPUTS / "sobol_T_integral.png", dpi=800, transparent=False)
         plt.show()
 
     plot_variance_decomposition(samples, param_names, t_eval_bl, y0, top_n=21)

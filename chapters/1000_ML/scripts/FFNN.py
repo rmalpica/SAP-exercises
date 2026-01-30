@@ -9,6 +9,13 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from b777_engine import plot_b777_engine
 
+from pathlib import Path
+HERE = Path(__file__).resolve().parent
+CHAPTER_DIR = HERE.parent
+DATA = CHAPTER_DIR / "data"
+OUTPUTS = CHAPTER_DIR / "outputs"
+OUTPUTS.mkdir(parents=True, exist_ok=True)
+
 #run in a conda environment created with:
 # conda create -n engine_pred python=3.9 numpy=1.23.5 matplotlib scikit-learn pytorch cpuonly -c pytorch -y conda activate engine_pred
 
@@ -65,8 +72,7 @@ def plot_losses(train_losses, val_losses):
     plt.ylabel('MSE Loss')
     plt.legend()
     plt.title('Training and Validation Loss over Epochs')
-    plt.savefig("../outputs/plot-losses.png", dpi=800, transparent=False)
-    print("Saving figure to:", os.path.abspath("plot-losses.png"))
+    plt.savefig(OUTPUTS / "plot-losses.png", dpi=800, transparent=False)
     plt.show()
 
 
@@ -164,8 +170,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train a neural network for engine performance prediction.")
-    parser.add_argument('--input_file', type=str, default='../data/b777_engine_inputs.dat', help='Path to input data file')
-    parser.add_argument('--output_file', type=str, default='../data/b777_engine_outputs.dat', help='Path to output data file')
+    parser.add_argument('--input_file', type=str, default=DATA / 'b777_engine_inputs.dat', help='Path to input data file')
+    parser.add_argument('--output_file', type=str, default=DATA / 'b777_engine_outputs.dat', help='Path to output data file')
     parser.add_argument('--epochs', type=int, default=200, help='Number of training epochs')
     parser.add_argument('--batch_size', type=int, default=32, help='Mini-batch size')
     parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate')
