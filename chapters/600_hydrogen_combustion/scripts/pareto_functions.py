@@ -3,16 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import Tuple, Callable, Dict, Optional
-from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-CHAPTER_DIR = HERE.parent
-DATA = CHAPTER_DIR / "data"
-OUTPUTS = CHAPTER_DIR / "outputs"
-OUTPUTS.mkdir(parents=True, exist_ok=True)
+@dataclass(frozen=True)
+class ObjectiveKeys:
+    tsec: str
+    st: str
 
-KEY_TSEC = "TSEC [MJ/Nh]"
-KEY_ST   = "specific thrust [N/(kg/s)]"
 # -------------------------------------------------------------------------
 # Design-space definition (continuous bounds for each decision variable)
 # -------------------------------------------------------------------------
@@ -39,6 +35,7 @@ def sample_designs(space: DesignSpace, n: int, seed: int = 0) -> pd.DataFrame:
 
 def evaluate(factory: Callable[..., object],
              d: Dict,
+             keys: ObjectiveKeys,
              h: float = 10000,
              Ma: float = 0.8) -> Optional[Dict]:
     """
@@ -48,9 +45,10 @@ def evaluate(factory: Callable[..., object],
     ----------
     factory:
         Callable that MUST create a *new* TurbofanEngine instance given design vars.
-        (Important for avoiding state carry-over between evaluations.)
     d:
         Dict-like object containing beta_f, beta_c, BPR, T4.
+    keys:
+        ObjectiveKeys object specifying the performance dictionary keys.
     h, Ma:
         Flight condition used for performance calculation.
 
@@ -59,34 +57,29 @@ def evaluate(factory: Callable[..., object],
     dict with design variables + the two objectives, or None if evaluation fails.
     """
     try:
-        # Create a new engine instance for this design
         eng = factory(beta_f=float(d["beta_f"]),
                       beta_c=float(d["beta_c"]),
                       BPR=float(d["BPR"]),
                       T_max=float(d["T4"]))
-        # Compute engine performance at the selected flight condition
         perf = eng.calculate(h=h, Ma=Ma, report=False)
 
-        # Return a flat record: design vars + objective values
         return {
             "beta_f": float(d["beta_f"]),
             "beta_c": float(d["beta_c"]),
             "BPR":    float(d["BPR"]),
             "T4":     float(d["T4"]),
-            KEY_TSEC: float(perf[KEY_TSEC]),
-            KEY_ST:   float(perf[KEY_ST]),
+            keys.tsec: float(perf[keys.tsec]),
+            keys.st:   float(perf[keys.st]),
         }
     except Exception:
-        # Fail-safe: caller can filter out None results
         return None
 
 def pareto_frontier(df: pd.DataFrame,
-                    tsec_key: str = KEY_TSEC,
-                    st_key: str = KEY_ST) -> pd.DataFrame:
+                    keys: ObjectiveKeys) -> pd.DataFrame:
     """
     Compute a 2D Pareto frontier with:
-      - minimize tsec_key
-      - maximize st_key
+      - minimize keys.tsec
+      - maximize keys.st
 
     Implementation note
     -------------------
@@ -101,7 +94,7 @@ def pareto_frontier(df: pd.DataFrame,
         return df.copy()
 
     # Sort by objective 1 (TSEC) ascending
-    tmp = df[[tsec_key, st_key]].to_numpy()
+    tmp = df[[keys.tsec, keys.st]].to_numpy()
     order = np.argsort(tmp[:, 0])  # increasing TSEC
     sdf = df.iloc[order].copy()
 
@@ -109,7 +102,7 @@ def pareto_frontier(df: pd.DataFrame,
     best_st = -np.inf
     keep_idx = []
     for i, row in sdf.iterrows():
-        st = row[st_key]
+        st = row[keys.st]
         if st > best_st:
             keep_idx.append(i)
             best_st = st
@@ -303,7 +296,7 @@ def polynomial_mutation(x, pm=0.1, eta=20, rng=None):
             y[i] = np.clip(y[i] + delta, 0.0, 1.0)
     return y
 
-def nsga2(factory, space, extra_keys=None,
+def nsga2(factory, space, keys: ObjectiveKeys, extra_keys=None,
           h=10000, Ma=0.8,
           pop_size=120, generations=60,
           cx_prob=0.9, mut_prob=0.2,
@@ -312,8 +305,8 @@ def nsga2(factory, space, extra_keys=None,
     Run NSGA-II for 4 design variables: beta_f, beta_c, BPR, T4.
 
     Objectives:
-      - minimize KEY_TSEC
-      - maximize KEY_ST
+      - minimize keys.tsec
+      - maximize keys.st
 
     Parameters
     ----------
@@ -380,14 +373,14 @@ def nsga2(factory, space, extra_keys=None,
 
             row = {
                 **d,
-                KEY_TSEC: float(perf[KEY_TSEC]),
-                KEY_ST:   float(perf[KEY_ST]),
+                keys.tsec: float(perf[keys.tsec]),
+                keys.st:   float(perf[keys.st]),
             }
             for k in extra_keys:
                 if k in perf:
                     row[k] = float(perf[k])
 
-            return row, row[KEY_TSEC], row[KEY_ST]
+            return row, row[keys.tsec], row[keys.st]
 
         except Exception as e:
             if verbose and not printed_once:
@@ -395,7 +388,7 @@ def nsga2(factory, space, extra_keys=None,
                 print("At design:", d)
                 printed_once = True
 
-            row = {**d, KEY_TSEC: np.inf, KEY_ST: -np.inf}
+            row = {**d, keys.tsec: np.inf, keys.st: -np.inf}
             for k in extra_keys:
                 row[k] = np.nan
             return row, np.inf, -np.inf
@@ -492,16 +485,15 @@ def nsga2(factory, space, extra_keys=None,
     results = pd.DataFrame(rows)
     fronts_final, _ = fast_nondominated_sort(obj)
     f0 = fronts_final[0]
-    pareto = results.iloc[f0].copy().sort_values(KEY_TSEC)
+    pareto = results.iloc[f0].copy().sort_values(keys.tsec)
     return results, pareto
 
 
 def plot_pareto_multi(frontiers,
+                      keys: ObjectiveKeys,
                       results_list=None,
                       labels=None,
                       show_cloud=False,
-                      tsec_key=KEY_TSEC,
-                      st_key=KEY_ST,
                       title=None):
     """
     Plot one or multiple Pareto frontiers in (TSEC, specific thrust).
@@ -548,23 +540,22 @@ def plot_pareto_multi(frontiers,
         for res, lab in zip(results_list, labels):
             if res is None or res.empty:
                 continue
-            plt.scatter(res[st_key], res[tsec_key], s=8, alpha=0.15, label=f"{lab} samples")
+            plt.scatter(res[keys.st], res[keys.tsec], s=8, alpha=0.15, label=f"{lab} samples")
 
     # Plot frontiers
     for pareto, lab in zip(frontier_list, labels):
         if pareto is None or pareto.empty:
             continue
         # Sort to get a nice curve
-        pareto_sorted = pareto.sort_values(st_key)
-        plt.scatter(pareto_sorted[st_key], pareto_sorted[tsec_key], s=35, label=lab)
+        pareto_sorted = pareto.sort_values(keys.st)
+        plt.scatter(pareto_sorted[keys.st], pareto_sorted[keys.tsec], s=35, label=lab)
 
-    plt.xlabel(st_key)
-    plt.ylabel(tsec_key)
+    plt.xlabel(keys.st)
+    plt.ylabel(keys.tsec)
     if title:
         plt.title(title)
     plt.grid(True, alpha=0.3)
     plt.legend()
-    plt.savefig(OUTPUTS / f"{title}_pareto.png", dpi=800, transparent=False)
     plt.show()
 
 def plot_xy_multi(frontiers,
@@ -644,7 +635,6 @@ def plot_xy_multi(frontiers,
     plt.legend()
     if invert_y:
         plt.gca().invert_yaxis()
-    plt.savefig(OUTPUTS / f"{title}_xy.png", dpi=800, transparent=False)
     plt.show()
 
 
@@ -731,7 +721,6 @@ def parallel_axes_plot(frontiers,
     ax.grid(True, axis="y", alpha=0.3)
     ax.legend()
     plt.tight_layout()
-    plt.savefig(OUTPUTS / "parallel_axis.png", dpi=800, transparent=False)
     plt.show()
 
 

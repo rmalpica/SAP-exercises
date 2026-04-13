@@ -8,10 +8,10 @@ from engine_framework.core import MixtureProperties
 # -------------------------------------------------------------------------
 # Consistent objective keys (match whatever TurbofanEngine.calculate returns)
 # -------------------------------------------------------------------------
-KEY_TSEC = "TSEC [MJ/Nh]"
-KEY_ST   = "specific thrust [N/(kg/s)]"
-
-
+keys = ObjectiveKeys(
+    tsec="TSEC [MJ/Nh]",
+    st="specific thrust [N/(kg/s)]"
+)
 
 
 # Configure mixture property evaluation method
@@ -75,16 +75,17 @@ EXTRA_KEYS = [
 ]
 
 # Run optimizer for each fuel (same random seed => comparable search stochasticity)
-results_K, pareto_K = nsga2(kerosene_factory, space, pop_size=120, generations=80, h=10000, Ma=0.8, seed=1, extra_keys=EXTRA_KEYS)
-results_H, pareto_H = nsga2(hydrogen_factory, space, pop_size=120, generations=80, h=10000, Ma=0.8, seed=1, extra_keys=EXTRA_KEYS)
+results_K, pareto_K = nsga2(kerosene_factory, space, keys, pop_size=120, generations=80, h=10000, Ma=0.8, seed=1, extra_keys=EXTRA_KEYS)
+results_H, pareto_H = nsga2(hydrogen_factory, space, keys, pop_size=120, generations=80, h=10000, Ma=0.8, seed=1, extra_keys=EXTRA_KEYS)
 
 # Inspect best (lowest TSEC) solutions on each front
-print(pareto_K.sort_values(KEY_TSEC).head(15))
-print(pareto_H.sort_values(KEY_TSEC).head(15))
+print(pareto_K.sort_values(keys.st).head(15))
+print(pareto_H.sort_values(keys.tsec).head(15))
 
 # Plot Pareto fronts 
 plot_pareto_multi(
     frontiers={"Kerosene": pareto_K, "Hydrogen": pareto_H},
+    keys=keys,
     results_list=[results_K, results_H],
     show_cloud=False,  # set True if you want the background points too
     title="Pareto frontiers in (TSEC, specific thrust)"
