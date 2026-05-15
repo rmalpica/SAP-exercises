@@ -17,15 +17,15 @@ described in the notes.
 ## Script and data
 
 🧪 **Script**  
-[`bayesian_climate.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_bayesian_climate_inference/scripts/bayesian_climate.py)
+[`bayesian_climate.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_UQ/scripts/bayesian_climate.py)
 
 🧪 **Datasets**  
 
-[Historical temperature data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_bayesian_climate_inference/data/T_data.csv)
+[Historical temperature data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_UQ/data/T_data.csv)
 
-[Historical CO₂ data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_bayesian_climate_inference/data/CO2_data.csv)
+[Historical CO₂ data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_UQ/data/co2_data.csv)
 
-[Historical CH₄ data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_bayesian_climate_inference/data/CH4_data.csv)
+[Historical CH₄ data](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_UQ/data/ch4_data.csv)
 
 These datasets correspond to those shown in the lecture notes (e.g. figures of historical data and posterior predictive checks).
 

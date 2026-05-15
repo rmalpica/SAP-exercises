@@ -3,14 +3,14 @@
 
 ### Files
 🧪 **Script**  
-[`FFNN.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/scripts/FFNN.py)
+[`FFNN.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ML/scripts/FFNN.py)
 
 🧪 **Dataset**  
-[`b777_engine_inputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/data/b777_engine_inputs.dat)
-[`b777_engine_outputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/data/b777_engine_outputs.dat)
+[`b777_engine_inputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ML/data/b777_engine_inputs.dat)
+[`b777_engine_outputs.dat`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ML/data/b777_engine_outputs.dat)
 
 🧪 **Supporting script**  
-[`b777_engine.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ffnn_engine_regression/scripts/b777_engine.py)
+[`b777_engine.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/1000_ML/scripts/b777_engine.py)
 
 - Supporting script (model/data context): `b777_engine.py`
 
@@ -130,6 +130,7 @@ Run the script as provided and report:
 - test-set performance using **at least one metric** of your choice.
 
 Produce:
+
 - one parity plot (predicted vs true) for at least one output variable.
 
 Write **6–10 lines** discussing whether the surrogate is acceptable for engineering use,
@@ -146,6 +147,7 @@ Train at least **three** different networks by varying **one** architectural cho
 - activation function (if supported by the script).
 
 Deliver:
+
 - training and validation loss curves for each case,
 - a short interpretation explaining:
 
@@ -161,6 +163,7 @@ Repeat the training using reduced fractions of the available dataset
 (e.g. 20%, 50%, and 100% of the training data).
 
 Deliver:
+
 - a plot of test error versus number of training samples,
 - a short paragraph answering:
 
