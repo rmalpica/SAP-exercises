@@ -2,8 +2,8 @@
 ## Breguet analysis
 
 🧪 **Scripts**  
-[`breguet_baseline_designpoint.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/600_hydrogen_combustion/scripts/equilibrium_calculation.py)
-[`breguet_altern_fuel_designpoint.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/600_hydrogen_combustion/scripts/equilibrium_calculation.py)
+[`breguet_baseline_designpoint.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/600_hydrogen_combustion/scripts/breguet_baseline_designpoint.py)
+[`breguet_altern_fuel_designpoint.py`](https://github.com/rmalpica/SAP-exercises/blob/main/chapters/600_hydrogen_combustion/scripts/breguet_altern_fuel_designpoint.py)
 
 ---
 
